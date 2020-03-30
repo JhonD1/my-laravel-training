@@ -1,0 +1,1 @@
+<img<?php echo $attributeString; ?> src="<?php echo e($media->getUrl($conversion)); ?>" alt="<?php echo e($media->name); ?>"><?php /**PATH C:\Users\john\Documents\Laravel-Appointments\vendor\spatie\laravel-medialibrary\src/../resources/views/image.blade.php ENDPATH**/ ?>
