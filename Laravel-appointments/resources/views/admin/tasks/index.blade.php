@@ -99,19 +99,18 @@
                         </a>
 
                         {{-- Delete Button --}}
-                        <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                        {{-- <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;"> --}}
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                        </form>
+              {{--           </form> --}}
                       </td>
 
                   </td>
                 </tr>
               @endforeach
                 <button class="btn btn-danger" type="submit">Del</button>
-
-              {{-- </form> --}}
+                </form>
             </tbody>
         </table>
 
@@ -119,13 +118,12 @@
     </div>
 </div>
 @endsection
-
 @section('scripts')
 @parent
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('role_delete')
+
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
@@ -153,7 +151,7 @@
     }
   }
   dtButtons.push(deleteButton)
-@endcan
+
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'desc' ]],

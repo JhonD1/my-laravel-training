@@ -50,9 +50,11 @@ class TasksController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $task = Task::create([
-            'title' => $request->title,
-            'description' =>$request->description,
-            'created_by' => $request->created_by]);
+            'title'       => $request->title,
+            'description' => $request->description,
+            'created_by'  => $request->created_by,
+            'photo'       => $request->photo]
+        );
 
         if ($request->input('photo', false)) {
             $task->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
@@ -114,7 +116,7 @@ class TasksController extends Controller
      */
     public function destroy(Task $task)
     {
-        Task::whereIn($task)->delete();
+        Task::where($task)->delete();
         $task->delete();
 
         return back();
