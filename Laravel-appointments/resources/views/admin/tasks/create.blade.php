@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group {{ $errors->has('users') ? 'has-error' : '' }}">
-                <label for="task">{{ trans('cruds.task.fields.created_by') }}
+                <label for="created_by">{{ trans('cruds.task.fields.created_by') }}
                 <select class="form-control select2" id='user_id' name = "created_by" required>
 
                     @foreach ($user_list as $user)

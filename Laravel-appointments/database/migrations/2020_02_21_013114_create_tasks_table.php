@@ -14,10 +14,10 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id', 10)->nullable()->unsigned()->autoIncrement();
+            $table->unsignedInteger('id', 10)->autoIncrement()->primary();
             $table->string('title', 255);
             $table->string('description');
-            $table->integer('created_by', 11);  
+            $table->integer('created_by', 11)->nullable();
             $table->timestamps();
         });
     }
