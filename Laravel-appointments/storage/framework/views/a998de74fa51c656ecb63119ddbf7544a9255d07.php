@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group <?php echo e($errors->has('users') ? 'has-error' : ''); ?>">
-                <label for="task"><?php echo e(trans('cruds.task.fields.created_by')); ?>
+                <label for="created_by"><?php echo e(trans('cruds.task.fields.created_by')); ?>
 
                 <select class="form-control select2" id='user_id' name = "created_by" required>
 
@@ -63,7 +63,7 @@
 
             <div class="form-group <?php echo e($errors->has('photo') ? 'has-error' : ''); ?>">
                 <label for="photo"><?php echo e(trans('cruds.task.fields.photo')); ?></label><br />
-                <input type="file" name="file">
+                <input type="file" name="photo">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                 </div>
                 <?php if($errors->has('photo')): ?>
@@ -82,7 +82,7 @@
             
               <input style="margin:20px 20px;" class="btn btn-danger" type="submit" value="<?php echo e(trans('global.save')); ?>">
             
-              <a style="margin-bottom:20px 20px;" class="btn btn-default" href="<?php echo e(url()->previous()); ?>">
+              <a style="margin-bottom:20px 20px;" class="btn btn-default" href="<?php echo e(route('admin.tasks.index')); ?>">
                   <?php echo e(trans('global.back_to_list')); ?>
 
               </a>

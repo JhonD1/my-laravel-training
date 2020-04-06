@@ -49,16 +49,25 @@ class TasksController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $task = Task::create([
-            'title'       => $request->title,
-            'description' => $request->description,
-            'created_by'  => $request->created_by,
-            'photo'       => $request->photo]
-        );
+        request()->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $task = new Task();
+        $imageName = request()->photo->getClientOriginalName();
 
-        if ($request->input('photo', false)) {
-            $task->addMedia(storage_path('tmp/uploads/' . $request->input('photo')))->toMediaCollection('photo');
-        }
+        // $image = request()->file('photo');
+        // $imageName = $image->getClientOriginalExtension();
+
+
+        $task->title = $request->get('title');
+        $task->description = $request->get('description');
+        $task->created_by = $request->get('created_by');
+        $task->description = $request->get('description');
+        $task->photo = $imageName;
+        $task->save();
+
+
+        request()->photo->move(storage_path('images'), $imageName);
 
         return redirect()->route('admin.tasks.index');
     }
