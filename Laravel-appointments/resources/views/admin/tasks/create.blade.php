@@ -56,7 +56,7 @@
 
             <div class="form-group {{ $errors->has('photo') ? 'has-error' : '' }}">
                 <label for="photo">{{ trans('cruds.task.fields.photo') }}</label><br />
-                <input type="file" name="file">
+                <input type="file" name="photo">
                 <input type="hidden" name="_token" value="{{ csrf_token()}}">
                 </div>
                 @if($errors->has('photo'))
@@ -73,7 +73,7 @@
             {{-- Save button --}}
               <input style="margin:20px 20px;" class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             {{-- Return button --}}
-              <a style="margin-bottom:20px 20px;" class="btn btn-default" href="{{ url()->previous() }}">
+              <a style="margin-bottom:20px 20px;" class="btn btn-default" href="{{ route('admin.tasks.index')}}">
                   {{ trans('global.back_to_list') }}
               </a>
            </div>
