@@ -28,6 +28,9 @@ class StoreTaskRequest extends FormRequest
             'created_by.*' => [
                 'required',
             ],
+            'photo' => [
+                'required',
+            ],
         ];
     }
 }
