@@ -66,7 +66,7 @@
               <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td>
-                    <form method="post" action="<?php echo e(route('admin.tasks.destroy', $task->id)); ?>">
+                    <form method="post" action="<?php echo e(route('admin.tasks.del', $task->id)); ?>">
                       <?php echo csrf_field(); ?>
 
                       <div class="checkbox">
@@ -140,6 +140,7 @@
 ##parent-placeholder-16728d18790deb58b3b8c1df74f06e536b532695##
 <script>
     $(function () {
+      console.log('hello Jhon');
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
   let deleteButtonTrans = '<?php echo e(trans('global.datatables.delete')); ?>'

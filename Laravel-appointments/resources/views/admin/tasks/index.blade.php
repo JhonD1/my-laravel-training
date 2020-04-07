@@ -58,7 +58,7 @@
               @foreach($tasks as $task)
                 <tr>
                   <td>
-                    <form method="post" action="{{ route('admin.tasks.destroy', $task->id) }}">
+                    <form method="post" action="{{ route('admin.tasks.del', $task->id) }}">
                       {!! csrf_field() !!}
                       <div class="checkbox">
                         <input type="checkbox" name="checked[]" value="{{$task->id}}"><label>{{$task->name}}</label>
@@ -118,10 +118,12 @@
     </div>
 </div>
 @endsection
+
 @section('scripts')
 @parent
 <script>
     $(function () {
+      console.log('hello Jhon');
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
