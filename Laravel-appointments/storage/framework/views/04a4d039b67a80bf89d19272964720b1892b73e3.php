@@ -12,6 +12,8 @@
             <a style="margin-right:20px;" class="btn btn-danger" href="<?php echo e(route("admin.tasks.del")); ?>">Delete
             </a>
 
+            
+            <a class = "btn btn-danger" href = "<?php echo e(route("admin.tasks.excel")); ?>">Export as Excel</a>
         </div>
     </div>
 <?php endif; ?>
@@ -66,9 +68,7 @@
               <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td>
-                    <form method="post" action="<?php echo e(route('admin.tasks.del', $task->id)); ?>">
-                      <?php echo csrf_field(); ?>
-
+                   
                       <div class="checkbox">
                         <input type="checkbox" name="checked[]" value="<?php echo e($task->id); ?>"><label><?php echo e($task->name); ?></label>
                       </div>
@@ -117,18 +117,18 @@
                         </a>
 
                         
+                        <a class="btn btn-xs btn-danger" href="<?php echo e(route('admin.tasks.destroy', $task->id)); ?>">
+                            <?php echo e(trans('global.delete')); ?>
+
+                        </a>
                         
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                            <input type="submit" class="btn btn-xs btn-danger" value="<?php echo e(trans('global.delete')); ?>">
-              
                       </td>
 
                   </td>
                 </tr>
               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <button class="btn btn-danger" type="submit">Del</button>
-                </form>
+                
             </tbody>
         </table>
 
@@ -136,6 +136,7 @@
     </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('scripts'); ?>
 ##parent-placeholder-16728d18790deb58b3b8c1df74f06e536b532695##
 <script>
