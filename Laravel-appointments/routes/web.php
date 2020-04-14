@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Tasks
     Route::delete('tasks/destroy', 'TasksController@massDestroy')->name('tasks.massDestroy');
+    Route::get('/tasks/excel', 'TasksController@excel')->name('tasks.excel');
     Route::post('tasks/media', 'TaskController@storeMedia')->name('tasks.storeMedia');
     Route::post('tasks/del', 'TasksController@del')->name('tasks.del');
     Route::resource('tasks', 'TasksController');

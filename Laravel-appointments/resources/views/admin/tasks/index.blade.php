@@ -12,6 +12,8 @@
             <a style="margin-right:20px;" class="btn btn-danger" href="{{ route("admin.tasks.del") }}">Delete
             </a>
 
+            {{-- Export as Excel --}}
+            <a class = "btn btn-danger" href = "{{ route("admin.tasks.excel") }}">Export as Excel</a>
         </div>
     </div>
 @endcan
@@ -58,8 +60,8 @@
               @foreach($tasks as $task)
                 <tr>
                   <td>
-                    <form method="post" action="{{ route('admin.tasks.del', $task->id) }}">
-                      {!! csrf_field() !!}
+                   {{--  <form method="post" action="{{ route('admin.tasks.del', $task->id) }}">
+                      {!! csrf_field() !!} --}}
                       <div class="checkbox">
                         <input type="checkbox" name="checked[]" value="{{$task->id}}"><label>{{$task->name}}</label>
                       </div>
@@ -99,18 +101,21 @@
                         </a>
 
                         {{-- Delete Button --}}
-                        {{-- <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;"> --}}
+                        <a class="btn btn-xs btn-danger" href="{{ route('admin.tasks.destroy', $task->id) }}">
+                            {{ trans('global.delete') }}
+                        </a>
+                        {{-- <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-              {{--           </form> --}}
+                        </form> --}}
                       </td>
 
                   </td>
                 </tr>
               @endforeach
                 <button class="btn btn-danger" type="submit">Del</button>
-                </form>
+                {{-- </form> --}}
             </tbody>
         </table>
 

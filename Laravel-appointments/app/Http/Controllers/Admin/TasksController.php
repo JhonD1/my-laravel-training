@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Role;
 use App\User;
 use App\Task;
+use Excel;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -125,7 +126,6 @@ class TasksController extends Controller
      */
     public function destroy(Task $task)
     {
-        Task::where($task)->delete();
         $task->delete();
 
         return back();
@@ -145,5 +145,33 @@ class TasksController extends Controller
 
         // return response(null, Response::HTTP_NO_CONTENT);
         return redirect()->route('admin.tasks.index');
+    }
+
+    public function excel()
+    {
+        $tasks = Task::with('users')->get()->toArray();
+
+        $tasks_array[] = array('Id', 'Title', 'Description', 'Photo',
+         'Created By', 'Created at', 'Updated At');
+
+        foreach($tasks as $task){
+
+            $tasks_array[] = array(
+                'Id'            => $task->id,
+                'Title'         => $task->title,
+                'Description'   => $task->description,
+                'Photo'         => $task->photo,
+                'Created By'    => $task->users()->pluck('name')->first(),
+                'Created at'    => $task->created_at,
+                'Updated At'    => $task->updated_at,
+            );
+        }
+        Excel::create('Task Data', function($excel) use($tasks_array){
+            $excel->setTitle('Task Data');
+            $excel->sheet('Customer Data', function($sheet){
+                $sheet0->fromArray($customer_array, null, 'A1', false, false);
+            });
+        })->download('xlsx');
+
     }
 }
